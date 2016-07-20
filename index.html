@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="index">
+
+<head>
+    <title>动物领养日</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- No Scaling / Optional / Make it more like native app / Normally not recommended -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/my.css"/>
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+    <script src="js/frame.js"></script>
+    <!---->
+    <style type="text/css">
+    	#xxx{
+    		position: fixed;
+    		bottom: 0;
+    		left: 0;
+    		width: 100%;
+    		background-color: #AC2925;
+    	}
+    </style>
+</head>
+
+<body>
+	<div id="main" class="container">
+		<div class="row" >
+			<div id="slider" class="col-md-12 col-xs-12">
+				<ul>
+					<li><img src="img/slide1.jpg" alt="" /></li>
+					<li><img src="img/slide2.jpg" alt="" /></li>
+					<li><img src="img/slide3.jpg" alt="" /></li>
+					<li><img src="img/slide4.jpg" alt="" /></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-3 col-xs-6 info">
+				<h3>信息</h3>
+				<hr />
+				<p>信息内容<br />开开心心<br />平平安安<br />快快乐乐</p>
+			</div>
+			<div class="col-md-3 col-xs-6 info">
+				<h3>通知</h3>
+				<hr />
+				<p>通知内容<br />老板<br />说要<br />加工资</p>
+			</div>
+			<div class="col-md-3 col-xs-6 info">
+				<h3>活动</h3>
+				<hr />
+				<p>活动详情<br />漂亮<br />妹纸<br />开爬梯</p>
+			</div>
+			<div class="col-md-3 col-xs-6 info">
+				<h3>新闻</h3>
+				<hr />
+				<p>新闻内容<br />明天<br />全国<br />放假啦</p>
+			</div>
+		</div>
+	</div>
+	<div id="xxx"></div>
+	<!---->
+<script type="text/javascript">
+;
+(function($){
+	$.fn.slider = function(option){
+		var _default = {time:2500};
+		this.config = $.extend(_default,option);
+		var pages = this.find("li");
+		var prv =pages.length-1;
+		var cur =0;
+		var nex =cur+1;
+		var limit = pages.length-1;
+		var inti = function(){
+			$(pages[prv]).css("left","-100%");
+			$(pages[cur]).css("left",0);
+		};
+		var slide = function(){
+			$(pages[prv]).css("left","100%");
+//			$(pages[cur]).css("left","-100%");
+			$(pages[cur]).animate({left:"-100%"});
+//			$(pages[nex]).css("left",0);
+			$(pages[nex]).animate({left:"0"});
+		};
+		var count = function(){
+			prv<limit?prv++:prv=0;
+			cur<limit?cur++:cur=0;
+			nex<limit?nex++:nex=0;
+		};
+		inti();
+		setInterval(function(){
+			slide();
+			count();
+		},this.config.time);
+	};
+})(jQuery);
+$("#slider").slider();
+</script>
+</body>
+</html>
